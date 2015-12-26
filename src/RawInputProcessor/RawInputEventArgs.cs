@@ -2,15 +2,15 @@ using System;
 
 namespace RawInputProcessor
 {
-    public class RawInputEventArgs : EventArgs
+    public sealed class RawInputEventArgs : EventArgs
     {
-        public RawKeyboardDevice Device { get; protected set; }
-        public KeyPressState KeyPressState { get; protected set; }
-        public uint Message { get; protected set; }
-        public int VirtualKey { get; protected set; }
+        public RawKeyboardDevice Device { get; private set; }
+        public KeyPressState KeyPressState { get; private set; }
+        public uint Message { get; private set; }
+        public int VirtualKey { get; private set; }
         public bool Handled { get; set; }
 
-        public RawInputEventArgs(RawKeyboardDevice device, KeyPressState keyPressState, uint message, int virtualKey)
+        internal RawInputEventArgs(RawKeyboardDevice device, KeyPressState keyPressState, uint message,  int virtualKey)
         {
             Device = device;
             KeyPressState = keyPressState;

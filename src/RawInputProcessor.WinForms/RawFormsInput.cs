@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace RawInputProcessor
 {
-    public class RawFormsInput : RawInput<RawInputEventArgs>
+    public class RawFormsInput : RawInput
     {
         // ReSharper disable once NotAccessedField.Local
         private RawInputNativeWindow _window;
@@ -17,11 +17,6 @@ namespace RawInputProcessor
             }
             _filter = new PreMessageFilter(this);
             Application.AddMessageFilter(_filter);
-        }
-
-        protected override RawInputEventArgs ConvertEventArgs(RawInputEventArgs eSource)
-        {
-            return eSource;
         }
 
         public override void RemoveMessageFilter()

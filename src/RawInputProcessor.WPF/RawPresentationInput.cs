@@ -7,23 +7,7 @@ using System.Windows.Input;
 
 namespace RawInputProcessor.WPF
 {
-    public sealed class RawInputEventArgs : RawInputProcessor.RawInputEventArgs
-    {
-        public Key Key { get; private set; }
-
-        public RawInputEventArgs(RawInputProcessor.RawInputEventArgs orignalToClone) 
-            : base(orignalToClone.Device,orignalToClone.KeyPressState,orignalToClone.Message,orignalToClone.VirtualKey)
-        {
-            this.Device = orignalToClone.Device;
-            this.Handled = orignalToClone.Handled;
-            this.KeyPressState = orignalToClone.KeyPressState;
-            this.Message = orignalToClone.Message;
-            this.VirtualKey = orignalToClone.VirtualKey;
-            Key = KeyInterop.KeyFromVirtualKey(this.VirtualKey);
-        }
-    }
-
-    public class RawPresentationInput : RawInput<RawInputEventArgs>
+    public class RawPresentationInput : RawInput
     {
         private bool _hasFilter;
 
@@ -68,11 +52,6 @@ namespace RawInputProcessor.WPF
         {
             ComponentDispatcher.ThreadFilterMessage -= OnThreadFilterMessage;
             _hasFilter = false;
-        }
-
-        protected override RawInputEventArgs ConvertEventArgs(RawInputProcessor.RawInputEventArgs eSource)
-        {
-            return new RawInputEventArgs(eSource);
         }
 
         // ReSharper disable once RedundantAssignment

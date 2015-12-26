@@ -2,12 +2,15 @@ using System;
 
 namespace RawInputProcessor
 {
-    public abstract class RawInput<T> : IDisposable
-        where T : RawInputEventArgs
+    public abstract class RawInput : IDisposable
     {
         private readonly RawKeyboard _keyboardDriver;
 
-        public event EventHandler<T> KeyPressed;
+        public event EventHandler<RawInputEventArgs> KeyPressed
+        {
+            add { KeyboardDriver.KeyPressed += value; }
+            remove { KeyboardDriver.KeyPressed -= value; }
+        }
 
         public int NumberOfKeyboards
         {
@@ -19,22 +22,9 @@ namespace RawInputProcessor
             get { return _keyboardDriver; }
         }
 
-        void _keyboardDriver_KeyPressed(object sender, RawInputEventArgs e)
-        {
-            var hndlr = KeyPressed;
-            if(hndlr!=null)
-            {
-                var ea = ConvertEventArgs(e);
-                hndlr(this, ea);
-            }
-        }
-
-        protected abstract T ConvertEventArgs(RawInputEventArgs eSource);
-
         protected RawInput(IntPtr handle, RawInputCaptureMode captureMode)
         {
             _keyboardDriver = new RawKeyboard(handle, captureMode == RawInputCaptureMode.Foreground);
-            _keyboardDriver.KeyPressed+=_keyboardDriver_KeyPressed;
         }
 
         public abstract void AddMessageFilter();
@@ -42,7 +32,6 @@ namespace RawInputProcessor
 
         public void Dispose()
         {
-            _keyboardDriver.KeyPressed -= _keyboardDriver_KeyPressed;
             KeyboardDriver.Dispose();
         }
     }
