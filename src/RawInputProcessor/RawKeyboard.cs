@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Windows.Input;
-using System.Windows.Interop;
 using RawInputProcessor.Win32;
 
 namespace RawInputProcessor
@@ -194,12 +192,10 @@ namespace RawInputProcessor
             bool isBreakBitSet = (flags & Win32Consts.RI_KEY_BREAK) != 0;
 
             uint message = rawBuffer.data.keyboard.Message;
-            Key key = KeyInterop.KeyFromVirtualKey(AdjustVirtualKey(rawBuffer, vKey, isE0BitSet, makecode));
             EventHandler<RawInputEventArgs> keyPressed = KeyPressed;
             if (keyPressed != null)
             {
-                var rawInputEventArgs = new RawInputEventArgs(device, isBreakBitSet ? KeyPressState.Up : KeyPressState.Down,
-                    message, key, vKey);
+                var rawInputEventArgs = new RawInputEventArgs(device, isBreakBitSet ? KeyPressState.Up : KeyPressState.Down, message, vKey);
                 keyPressed(this, rawInputEventArgs);
                 if (rawInputEventArgs.Handled)
                 {

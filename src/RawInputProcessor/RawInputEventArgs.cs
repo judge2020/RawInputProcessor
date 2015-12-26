@@ -1,24 +1,20 @@
 using System;
-using System.Windows.Input;
 
 namespace RawInputProcessor
 {
-    public sealed class RawInputEventArgs : EventArgs
+    public class RawInputEventArgs : EventArgs
     {
-        public RawKeyboardDevice Device { get; private set; }
-        public KeyPressState KeyPressState { get; private set; }
-        public uint Message { get; private set; }
-        public Key Key { get; private set; }
-        public int VirtualKey { get; private set; }
+        public RawKeyboardDevice Device { get; protected set; }
+        public KeyPressState KeyPressState { get; protected set; }
+        public uint Message { get; protected set; }
+        public int VirtualKey { get; protected set; }
         public bool Handled { get; set; }
 
-        internal RawInputEventArgs(RawKeyboardDevice device, KeyPressState keyPressState, uint message, Key key,
-            int virtualKey)
+        public RawInputEventArgs(RawKeyboardDevice device, KeyPressState keyPressState, uint message, int virtualKey)
         {
             Device = device;
             KeyPressState = keyPressState;
             Message = message;
-            Key = key;
             VirtualKey = virtualKey;
         }
     }
