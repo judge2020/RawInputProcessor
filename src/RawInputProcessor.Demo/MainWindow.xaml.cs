@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RawInputProcessor.WPF;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -25,7 +26,7 @@ namespace RawInputProcessor.Demo
             set
             {
                 _deviceCount = value;
-                OnPropertyChanged();
+                OnPropertyChanged("DeviceCount");
             }
         }
 
@@ -35,7 +36,7 @@ namespace RawInputProcessor.Demo
             set
             {
                 _event = value;
-                OnPropertyChanged();
+                OnPropertyChanged("Event");
             }
         }
 
@@ -61,7 +62,7 @@ namespace RawInputProcessor.Demo
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChangedEventHandler propertyChanged = PropertyChanged;
             if (propertyChanged != null)
