@@ -1,4 +1,4 @@
-﻿namespace RawInputProcessor.Demo
+﻿namespace RawInputProcessor.WPFDemo
 {
     /// <summary>
     /// Interaction logic for App.xaml

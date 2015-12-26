@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace RawInputProcessor.Demo
+namespace RawInputProcessor.WPFDemo
 {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
