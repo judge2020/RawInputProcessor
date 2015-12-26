@@ -16,7 +16,7 @@
                        Text="Press an key on an attached keyboard, or enter text in the textbox below, to see details of the input device and the key(s) you pressed." />
             <TextBlock Text="Latest Keystroke"
                        Style="{StaticResource HeaderTextStyle}" />
-            <TextBlock Text="{Binding Event.Key, StringFormat='{}{0}'}" />
+            <TextBlock Text="{Binding Event.AdjustedVirtualKey, StringFormat='{}{0}', Converter={StaticResource virtualKeyToKeyConverter}}" />
             <TextBlock Text="{Binding Event.VirtualKey}" />
             <TextBlock Text="{Binding Event.KeyPressState}" />
             <TextBlock Text="Device Details"

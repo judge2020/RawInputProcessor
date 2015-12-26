@@ -41,6 +41,7 @@
     <Compile Include="RawInput.cs" />
     <Compile Include="RawInputCaptureMode.cs" />
     <Compile Include="RawInputEventArgs.cs" />
+    <Compile Include="RawInputUtilities.cs" />
     <Compile Include="RawKeyboard.cs" />
     <Compile Include="RawKeyboardDevice.cs" />
     <Compile Include="Win32\MSG.cs" />

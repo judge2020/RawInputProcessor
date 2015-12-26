@@ -195,7 +195,8 @@ namespace RawInputProcessor
             EventHandler<RawInputEventArgs> keyPressed = KeyPressed;
             if (keyPressed != null)
             {
-                var rawInputEventArgs = new RawInputEventArgs(device, isBreakBitSet ? KeyPressState.Up : KeyPressState.Down, message, vKey);
+                var adjustedVirtualKey = RawInputUtilities.AdjustVirtualKey(rawBuffer.header.hDevice, vKey, isE0BitSet, makecode);
+                var rawInputEventArgs = new RawInputEventArgs(device, isBreakBitSet ? KeyPressState.Up : KeyPressState.Down, message, adjustedVirtualKey, vKey);
                 keyPressed(this, rawInputEventArgs);
                 if (rawInputEventArgs.Handled)
                 {
@@ -205,41 +206,6 @@ namespace RawInputProcessor
                 return rawInputEventArgs.Handled;
             }
             return false;
-        }
-
-        private static int AdjustVirtualKey(InputData rawBuffer, int virtualKey, bool isE0BitSet, int makeCode)
-        {
-            var adjustedKey = virtualKey;
-
-            if (rawBuffer.header.hDevice == IntPtr.Zero)
-            {
-                // When hDevice is 0 and the vkey is VK_CONTROL indicates the ZOOM key
-                if (rawBuffer.data.keyboard.VKey == Win32Consts.VK_CONTROL)
-                {
-                    adjustedKey = Win32Consts.VK_ZOOM;
-                }
-            }
-            else
-            {
-                switch (virtualKey)
-                {
-                    // Right-hand CTRL and ALT have their e0 bit set 
-                    case Win32Consts.VK_CONTROL:
-                        adjustedKey = isE0BitSet ? Win32Consts.VK_RCONTROL : Win32Consts.VK_LCONTROL;
-                        break;
-                    case Win32Consts.VK_MENU:
-                        adjustedKey = isE0BitSet ? Win32Consts.VK_RMENU : Win32Consts.VK_LMENU;
-                        break;
-                    case Win32Consts.VK_SHIFT:
-                        adjustedKey = makeCode == Win32Consts.SC_SHIFT_R ? Win32Consts.VK_RSHIFT : Win32Consts.VK_LSHIFT;
-                        break;
-                    default:
-                        adjustedKey = virtualKey;
-                        break;
-                }
-            }
-
-            return adjustedKey;
         }
 
         public bool HandleMessage(int msg, IntPtr wparam, IntPtr lparam)

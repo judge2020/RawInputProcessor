@@ -1,6 +1,7 @@
 ﻿<Application x:Class="RawInputProcessor.WPFDemo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:rawinputwpf="clr-namespace:RawInputProcessor.WPF;assembly=RawInputProcessor.WPF"         
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Style TargetType="{x:Type TextBlock}">
@@ -20,5 +21,8 @@
             <Setter Property="Margin"
                     Value="3" />
         </Style>
+
+        <rawinputwpf:VirtualKeyToKeyConverter x:Key="virtualKeyToKeyConverter" />
+
     </Application.Resources>
 </Application>
