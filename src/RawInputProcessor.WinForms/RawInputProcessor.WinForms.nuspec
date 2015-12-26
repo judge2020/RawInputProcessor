@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Steve Messer, Emma Burrows, aelij, andulv</authors>
+    <owners>Steve Messer, Emma Burrows</owners>
+    <licenseUrl>http://www.codeproject.com/info/cpol10.aspx</licenseUrl>
+    <projectUrl>https://github.com/andulv/RawInputProcessor</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      Provides a way to distinguish input from multiple keyboards in Windows Forms.
+
+      Forked from this CodeProject article:
+      http://www.codeproject.com/Articles/17123/Using-Raw-Input-from-C-to-handle-multiple-keyboard
+    </description>
+    <summary>Provides a way to distinguish input from multiple keyboards. Windows Forms implementation.</summary>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>raw input rawinput hid keyboard rawkeyboard win32 winforms windows forms</tags>
+  </metadata>
+</package>

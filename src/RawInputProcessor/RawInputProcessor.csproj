@@ -51,6 +51,8 @@
     <Compile Include="Win32\Win32Consts.cs" />
     <Compile Include="Win32\Win32Methods.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="RawInputProcessor.nuspec" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
