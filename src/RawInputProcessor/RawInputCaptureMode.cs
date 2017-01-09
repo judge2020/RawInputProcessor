@@ -1,8 +1,8 @@
 namespace RawInputProcessor
 {
-    public enum RawInputCaptureMode
-    {
-        Foreground,
-        ForegroundAndBackground,
-    }
+	public enum RawInputCaptureMode
+	{
+		Foreground,
+		ForegroundAndBackground
+	}
 }

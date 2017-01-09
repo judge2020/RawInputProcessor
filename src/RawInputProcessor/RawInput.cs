@@ -2,37 +2,32 @@ using System;
 
 namespace RawInputProcessor
 {
-    public abstract class RawInput : IDisposable
-    {
-        private readonly RawKeyboard _keyboardDriver;
+	public abstract class RawInput : IDisposable
+	{
+		protected RawInput(IntPtr handle, RawInputCaptureMode captureMode)
+		{
+			KeyboardDriver = new RawKeyboard(handle, captureMode == RawInputCaptureMode.Foreground);
+		}
 
-        public event EventHandler<RawInputEventArgs> KeyPressed
-        {
-            add { KeyboardDriver.KeyPressed += value; }
-            remove { KeyboardDriver.KeyPressed -= value; }
-        }
+		public int NumberOfKeyboards
+		{
+			get { return KeyboardDriver.NumberOfKeyboards; }
+		}
 
-        public int NumberOfKeyboards
-        {
-            get { return KeyboardDriver.NumberOfKeyboards; }
-        }
+		protected RawKeyboard KeyboardDriver { get; }
 
-        protected RawKeyboard KeyboardDriver
-        {
-            get { return _keyboardDriver; }
-        }
+		public void Dispose()
+		{
+			KeyboardDriver.Dispose();
+		}
 
-        protected RawInput(IntPtr handle, RawInputCaptureMode captureMode)
-        {
-            _keyboardDriver = new RawKeyboard(handle, captureMode == RawInputCaptureMode.Foreground);
-        }
+		public event EventHandler<RawInputEventArgs> KeyPressed
+		{
+			add { KeyboardDriver.KeyPressed += value; }
+			remove { KeyboardDriver.KeyPressed -= value; }
+		}
 
-        public abstract void AddMessageFilter();
-        public abstract void RemoveMessageFilter();
-
-        public void Dispose()
-        {
-            KeyboardDriver.Dispose();
-        }
-    }
+		public abstract void AddMessageFilter();
+		public abstract void RemoveMessageFilter();
+	}
 }

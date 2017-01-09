@@ -1,9 +1,9 @@
 namespace RawInputProcessor
 {
-    public enum RawDeviceType
-    {
-        Mouse,
-        Keyboard,
-        Hid
-    }
+	public enum RawDeviceType
+	{
+		Mouse,
+		Keyboard,
+		Hid
+	}
 }

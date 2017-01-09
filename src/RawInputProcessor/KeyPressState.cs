@@ -1,8 +1,8 @@
 namespace RawInputProcessor
 {
-    public enum KeyPressState
-    {
-        Up,
-        Down
-    }
+	public enum KeyPressState
+	{
+		Up,
+		Down
+	}
 }
